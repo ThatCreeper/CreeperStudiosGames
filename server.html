@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<span id="scorel">Left Team: 0</span><br><span id="scorer">Right Team: 0</span><br>
+<button onclick="sr(1)">LEFT</button>
+<button onclick="sr(0)">RIGHT</button>
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script>
+
+var socket=io();
+var scorel=0;
+var scorer=0;
+
+function Score(data) {
+	console.log("{ this is a string }");
+	
+	document.getElementById("scorel").innerHtml="Hello";
+	document.getElementById("scorer").innerHtml="Right Team: "+scorer;
+}
+
+socket.on('SScore', function(data){
+	Score(data);
+	console.log(data);
+});
+function sr(test) {
+	console.log(test)
+	socket.emit("Score",{p:test});
+}
+
+
+
+
+</script>
+</body>
+</html>
